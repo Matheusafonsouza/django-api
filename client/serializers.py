@@ -18,7 +18,7 @@ class ClientSerializer(serializers.ModelSerializer):
         """
         if not validate_cpf(data['cpf']):
             raise serializers.ValidationError(
-                dict(cpf='CPF must have 11 digits.'))
+                dict(cpf='CPF number invalid.'))
         if not validate_rg(data['rg']):
             raise serializers.ValidationError(
                 dict(rg='RG must have 9 digits.'))

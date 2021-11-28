@@ -1,4 +1,5 @@
 import re
+from validate_docbr import CPF
 
 
 def validate_cpf(cpf):
@@ -7,7 +8,7 @@ def validate_cpf(cpf):
     :param cpf: Client instance cpf
     :returnts: The true if validation is ok or false if validation fails
     """
-    return len(cpf) == 11
+    return CPF().validate(cpf)
 
 
 def validate_rg(rg):
