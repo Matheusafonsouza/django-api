@@ -8,3 +8,12 @@ class CourseLevelEnum(BaseEnum):
     EASY = 'EASY'
     MEDIUM = 'MEDIUM'
     HARD = 'HARD'
+
+
+class EnrolmentPeriodEnum(BaseEnum):
+    """
+    Enum for course dificulty levels.
+    """
+    MORNING = 'MORNING'
+    AFTERNOON = 'AFTERNOON'
+    NIGHT = 'NIGHT'
