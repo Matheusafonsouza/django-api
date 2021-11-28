@@ -1,3 +1,6 @@
+import re
+
+
 def validate_cpf(cpf):
     """
     Method for validate cpf conditions.
@@ -22,7 +25,9 @@ def validate_phone(phone):
     :param phone: Client instance phone
     :returnts: The true if validation is ok or false if validation fails
     """
-    return len(phone) == 11
+    pattern = '[0-9]{2} [0-9]{5}-[0-9]{4}'
+    matches = re.findall(pattern, phone)
+    return matches
 
 
 def validate_name(name):
