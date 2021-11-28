@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 
 from school.models import Enrolment, Student, Course
-from school.serializers import EnrolmentSerializer, StudentCoursesSerializer, StudentSerializer, CourseSerializer
+from school.serializers import CourseStudentsSerializer, EnrolmentSerializer, StudentCoursesSerializer, StudentSerializer, CourseSerializer
 
 
 class StudentsViewSet(ModelViewSet):
@@ -29,6 +29,16 @@ class CoursesViewSet(ModelViewSet):
     """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+
+class CourseStudentsListView(ListAPIView):
+    """"
+    View set for list course students.
+    """
+    serializer_class = CourseStudentsSerializer
+
+    def get_queryset(self):
+        return Enrolment.objects.filter(course__pk=self.kwargs['pk'])
 
 
 class EnrolmentsViewSet(ModelViewSet):

@@ -31,6 +31,17 @@ class CourseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CourseStudentsSerializer(serializers.ModelSerializer):
+    """
+    Serializer class for list all students for a course instance.
+    """
+    student = serializers.ReadOnlyField(source='student.name')
+
+    class Meta:
+        model = Enrolment
+        fields = ('student', 'period')
+
+
 class EnrolmentSerializer(serializers.ModelSerializer):
     """
     Serializer class for do and undo serialization over the enrolment model.
