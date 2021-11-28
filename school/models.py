@@ -1,5 +1,5 @@
 from django.db import models
-from school.enums import CourseLevelEnum
+from school.enums import CourseLevelEnum, EnrolmentPeriodEnum
 
 
 class Student(models.Model):
@@ -25,3 +25,21 @@ class Course(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Enrolment(models.Model):
+    period = models.CharField(
+        max_length=10,
+        choices=EnrolmentPeriodEnum.choices(),
+        blank=False,
+        null=False,
+        default=EnrolmentPeriodEnum.MORNING
+    )
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE
+    )
