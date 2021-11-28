@@ -8,7 +8,17 @@ class StudentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = ['id', 'name', 'rg', 'cpf', 'birth_date']
+
+
+class StudentSerializerV2(serializers.ModelSerializer):
+    """
+    Second serializer class for do and undo serialization over the student 
+    model, use for version 2 of api.
+    """
+    class Meta:
+        model = Student
+        fields = ['id', 'name', 'rg', 'cpf', 'birth_date', 'phone']
 
 
 class StudentCoursesSerializer(serializers.ModelSerializer):

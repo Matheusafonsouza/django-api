@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from school.models import Enrolment, Student, Course
 from school.serializers import (
     CourseStudentsSerializer, EnrolmentSerializer,
-    StudentCoursesSerializer, StudentSerializer, CourseSerializer
+    StudentCoursesSerializer, StudentSerializer, CourseSerializer, StudentSerializerV2
 )
 
 
@@ -15,9 +15,17 @@ class StudentsViewSet(ModelViewSet):
     View set for HTTP requests over Student model
     """
     queryset = Student.objects.all()
-    serializer_class = StudentSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        """
+        Defines the serializer class from the api version.
+        :returns: Serializer class
+        """
+        if self.request.version == 'v2':
+            return StudentSerializerV2
+        return StudentSerializer
 
 
 class StudentCoursesListView(ListAPIView):
