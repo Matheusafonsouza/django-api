@@ -59,3 +59,4 @@ class EnrolmentsViewSet(ModelViewSet):
     """
     queryset = Enrolment.objects.all()
     serializer_class = EnrolmentSerializer
+    http_method_names = ['get', 'post', 'put', 'path']
