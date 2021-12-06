@@ -1,3 +1,5 @@
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 
@@ -41,6 +43,16 @@ class CoursesViewSet(ModelViewSet):
     """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = Response(
+                serializer.data, status=status.HTTP_201_CREATED)
+            pk = str(serializer.data['id'])
+            response['Location'] = request.build_absolute_uri() + pk
+            return response
 
 
 class CourseStudentsListView(ListAPIView):
