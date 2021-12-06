@@ -15,7 +15,7 @@ class ClientsViewSet(ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     ordering_fields = ['name']
     search_fields = ['name', 'cpf']
