@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django_filters',
     'common',
     'school',
-    'client'
+    'client',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,3 +152,5 @@ REST_FRAMEWORK = {
         'user': '1000/day'
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
