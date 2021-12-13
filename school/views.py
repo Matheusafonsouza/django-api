@@ -2,7 +2,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from school.models import Enrolment, Student, Course
 from school.serializers import (
     CourseStudentsSerializer, EnrolmentSerializer,
@@ -72,3 +73,7 @@ class EnrolmentsViewSet(ModelViewSet):
     queryset = Enrolment.objects.all()
     serializer_class = EnrolmentSerializer
     http_method_names = ['get', 'post', 'put', 'path']
+
+    @method_decorator(cache_page(20))
+    def dispatch(self, *args, **kwargs):
+        return super(EnrolmentsViewSet, self).dispatch(*args, **kwargs)
