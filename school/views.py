@@ -76,4 +76,5 @@ class EnrolmentsViewSet(ModelViewSet):
 
     @method_decorator(cache_page(20))
     def dispatch(self, *args, **kwargs):
+        print(args, kwargs)
         return super(EnrolmentsViewSet, self).dispatch(*args, **kwargs)
